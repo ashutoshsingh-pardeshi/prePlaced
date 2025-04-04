@@ -11,6 +11,7 @@ function reverseString(str) {
     .reverse()
     .join(".");
 }
+
 // Longest Common Prefix using Sorting
 // Link: https://www.geeksforgeeks.org/longest-common-prefix-using-sorting/
 let commonPrefixArray1 = ["apple", "ape", "april"];
@@ -90,7 +91,7 @@ function convertRomanToInt(romanNumber) {
 let number1 = 1904;
 let number2 = 2940;
 
-console.log("# Roman number for", number2, "is", convertIntToRoman(number2));
+// console.log("# Roman number for", number2, "is", convertIntToRoman(number2));
 
 function convertIntToRoman(number) {
   // Corner case
@@ -122,6 +123,53 @@ function convertIntToRoman(number) {
     number -= prev;
     roman.push(intToRoman[prev]);
   }
-  
+
   return roman.join("");
+}
+
+// Check if two given Strings are Isomorphic to each other
+// Link: https://www.geeksforgeeks.org/check-if-two-given-strings-are-isomorphic-to-each-other/
+
+let string1 = "aab";
+let string2 = "aaa";
+
+// console.log(
+//   "Strings ",
+//   string1,
+//   "and",
+//   string2,
+//   "are isomorphic -> ",
+//   isIsomorphic(string1, string2)
+// );
+
+function isIsomorphic(str1, str2) {
+  // If length not equal, then return false
+  if (str1.length !== str2.length) return false;
+
+  // If length is only 1, then return immediate comparison
+  if (str1.length === 1) return str1 === str2;
+
+  let isoMap1 = {},
+    isoMap2 = {},
+    i = 1;
+  isoMap1[str1[0]] = str2[0];
+  isoMap2[str2[0]] = str1[0];
+
+  for (i = 1; i < str1.length; i++) {
+    // This is apparently wrong ??
+    // if (str1[i] in isoMap1 || str2[i] in isoMap2) {
+    //   if (isoMap1[str1[i]] !== str2[i] && isoMap2[str2[i]] !== str1[i]) break;
+    // } else {
+    //   isoMap1[str1[i]] = str2[i];
+    //   isoMap2[str2[i]] = str1[i];
+    // }
+
+    if (str1[i] in isoMap1 && isoMap1[str1[i]] !== str2[i]) break;
+    if (str2[i] in isoMap2 && isoMap2[str2[i]] !== str1[i]) break;
+
+    isoMap1[str1[i]] = str2[i];
+    isoMap2[str2[i]] = str1[i];
+  }
+
+  return i === str1.length;
 }
