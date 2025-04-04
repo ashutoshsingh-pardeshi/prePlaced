@@ -1,4 +1,5 @@
-// Reverse words in a given string https://www.geeksforgeeks.org/reverse-words-in-a-given-string/
+// Reverse words in a given string
+// Link: https://www.geeksforgeeks.org/reverse-words-in-a-given-string/
 let sampleString = "Hello..World.!";
 let sampleString2 = "";
 // console.log("# Reversed String :", reverseString(sampleString2));
@@ -10,7 +11,8 @@ function reverseString(str) {
     .reverse()
     .join(".");
 }
-// Longest Common Prefix using Sorting https://www.geeksforgeeks.org/longest-common-prefix-using-sorting/
+// Longest Common Prefix using Sorting
+// Link: https://www.geeksforgeeks.org/longest-common-prefix-using-sorting/
 let commonPrefixArray1 = ["apple", "ape", "april"];
 let commonPrefixArray2 = ["geeksforgeeks", "geeks", "geek", "geezer"];
 
@@ -41,7 +43,8 @@ function commonPrefix(arr) {
   return minStr.slice(0, i + 1);
 }
 
-// Converting Roman Numerals to Integer https://www.geeksforgeeks.org/roman-number-to-integer/
+// Converting Roman Numerals to Integer
+// Link: https://www.geeksforgeeks.org/roman-number-to-integer/
 let romanNumber1 = "MCMIV";
 let romanNumber2 = "X";
 
@@ -52,7 +55,7 @@ let romanNumber2 = "X";
 //   convertRomantoInt(romanNumber1)
 // );
 
-function convertRomantoInt(romanNumber) {
+function convertRomanToInt(romanNumber) {
   // Empty string
   if (!romanNumber.length) return;
 
@@ -80,4 +83,45 @@ function convertRomantoInt(romanNumber) {
   }
 
   return result;
+}
+
+// Converting Decimal Number lying between 1 to 3999 to Roman Numerals
+// Link: https://www.geeksforgeeks.org/converting-decimal-number-lying-between-1-to-3999-to-roman-numerals/
+let number1 = 1904;
+let number2 = 2940;
+
+console.log("# Roman number for", number2, "is", convertIntToRoman(number2));
+
+function convertIntToRoman(number) {
+  // Corner case
+  if (number < 1 || number > 3999) return;
+
+  const intToRoman = {
+    1: "I",
+    4: "IV",
+    5: "V",
+    9: "IX",
+    10: "X",
+    40: "XL",
+    50: "L",
+    90: "XC",
+    100: "C",
+    400: "CD",
+    500: "D",
+    900: "CM",
+    1000: "M",
+  };
+
+  let roman = [];
+  while (number > 0) {
+    let prev = null;
+    for (let i in intToRoman) {
+      if (number < i) break;
+      prev = i;
+    }
+    number -= prev;
+    roman.push(intToRoman[prev]);
+  }
+  
+  return roman.join("");
 }
