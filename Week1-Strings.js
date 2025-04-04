@@ -40,3 +40,44 @@ function commonPrefix(arr) {
 
   return minStr.slice(0, i + 1);
 }
+
+// Converting Roman Numerals to Integer https://www.geeksforgeeks.org/roman-number-to-integer/
+let romanNumber1 = "MCMIV";
+let romanNumber2 = "X";
+
+// console.log(
+//   "# The integer equivalent of",
+//   romanNumber1,
+//   "is",
+//   convertRomantoInt(romanNumber1)
+// );
+
+function convertRomantoInt(romanNumber) {
+  // Empty string
+  if (!romanNumber.length) return;
+
+  const romanToInt = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+  // If length is 1
+  if (romanNumber.length === 1) return romanToInt[romanNumber];
+
+  let result = 0;
+
+  for (let i = 0; i < romanNumber.length; i++) {
+    if (romanToInt[romanNumber[i]] < romanToInt[romanNumber[i + 1]]) {
+      result += romanToInt[romanNumber[i + 1]] - romanToInt[romanNumber[i]];
+      i++;
+    } else {
+      result += romanToInt[romanNumber[i]];
+    }
+  }
+
+  return result;
+}
