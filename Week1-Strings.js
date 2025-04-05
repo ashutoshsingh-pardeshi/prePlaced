@@ -179,9 +179,43 @@ function isIsomorphic(str1, str2) {
 
 let pangramString1 = "All the alphabets must be included here !";
 let pangramString2 = "The quick brown fox jumps over the lazy dog";
-console.log("Given string is a panagram :", isPanagram(pangramString1));
+// console.log("Given string is a panagram :", isPanagram(pangramString1));
 
 function isPanagram(str) {
   let allLetters = new Set(str.toLowerCase().match(/[a-z]/g));
   return allLetters.size === 26;
+}
+
+// Count Distinct Subsequences
+// Link: https://www.geeksforgeeks.org/count-distinct-subsequences/
+
+let mainString1 = "gfg";
+console.log("# substrings ", returnSubstrings(mainString1));
+
+function returnSubstrings(str) {
+  let result = [];
+  if (str.length === 1) {
+    // End-point conidtion
+    return [str, ""];
+  } else {
+    for (let i = 1; i < str.length + 1; i++) {
+      result.push(str.slice(0, i));
+    }
+
+    return [...new Set([...result, ...returnSubstrings(str.slice(1))])];
+  }
+}
+
+// From CHatGPT - Much efficient and faster
+function returnSubstrings2(str){
+  const result = new Set();
+
+  for (let i = 0; i < str.length; i++) {
+    for (let j = i + 1; j <= str.length; j++) {
+      result.add(str.slice(i, j));
+    }
+  }
+
+  result.add(""); // Include empty string explicitly
+  return Array.from(result);
 }
