@@ -173,3 +173,15 @@ function isIsomorphic(str1, str2) {
 
   return i === str1.length;
 }
+
+// Check if given String is Pangram or not
+// Link: https://www.geeksforgeeks.org/pangram-checking/
+
+let pangramString1 = "All the alphabets must be included here !";
+let pangramString2 = "The quick brown fox jumps over the lazy dog";
+console.log("Given string is a panagram :", isPanagram(pangramString1));
+
+function isPanagram(str) {
+  let allLetters = new Set(str.toLowerCase().match(/[a-z]/g));
+  return allLetters.size === 26;
+}
