@@ -258,3 +258,18 @@ function rotatedArray(arr, isClockwise, steps) {
   rotatedArray.splice(index, steps, ...temp);
   return rotatedArray;
 }
+
+//* Count pairs with given sum
+//? Link: https://www.geeksforgeeks.org/count-pairs-with-given-sum/
+
+function returnPairs(arr, target) {
+  let freq = new Map();
+  for (num of arr) freq.set(num, (freq.get(num) || 0) + 1);
+
+  let count = 0;
+  for (num of arr) {
+    count += freq.get(target - num) || 0;
+  }
+
+  return count/2; //! This can give wrong results - need to be updated
+}
