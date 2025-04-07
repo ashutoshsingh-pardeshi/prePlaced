@@ -120,3 +120,13 @@ function numberOfSteps(arr) {
 
   return sum <= 0 ? steps + (1 - sum) : steps;
 }
+
+//* Minimum steps required to reduce all the elements of the array to zero
+//? Link: https://www.geeksforgeeks.org/minimum-steps-required-to-reduce-all-the-elements-of-the-array-to-zero/?ref=ml_lbp
+
+function makeZero(arr) {
+  // If array is empty
+  if (arr.length === 0) return -1;
+
+  return Math.max(...arr);
+}
