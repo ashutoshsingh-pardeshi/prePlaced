@@ -34,18 +34,18 @@ function peakElement(arr) {
 //* Program to find the minimum (or maximum) element of an array
 //? Link: https://www.geeksforgeeks.org/program-find-minimum-maximum-element-array/
 
-console.log("Minimum element = ", findMinMax(array1, 1));
-console.log("Maximum element = ", findMinMax(array1, 0));
+// console.log("Minimum element = ", findMinMax(array1, 1));
+// console.log("Maximum element = ", findMinMax(array1, 0));
 
 //! How .sort() works
 //? return positive - the numbers are swapped
 //? return negative - the order is maintained
-console.log(
-  "Via sort method, minimum = ",
-  array1.sort((a, b) => a - b)[0],
-  " and maximum = ",
-  array1.sort((a, b) => b - a)[0]
-);
+// console.log(
+//   "Via sort method, minimum = ",
+//   array1.sort((a, b) => a - b)[0],
+//   " and maximum = ",
+//   array1.sort((a, b) => b - a)[0]
+// );
 
 function findMinMax(arr, isMin) {
   // isMin undefined or out of boundry
@@ -69,4 +69,26 @@ function findMinMax(arr, isMin) {
   }
 
   return num;
+}
+
+//* Sum and Product of minimum and maximum element of an Array
+//? Link: https://www.geeksforgeeks.org/sum-and-product-of-minimum-and-maximum-element-of-an-array/?ref=ml_lbp
+
+const sum_product = sumAndProduct(array1);
+console.log("# Sum :", sum_product.sum, " and product :", sum_product.product);
+function sumAndProduct(arr) {
+  // Corner case
+  if ([0, 1].includes(arr.length)) return { sum: -1, product: -1 };
+
+  // Contains only 2 elements
+  if (arr.length === 2)
+    return { sum: arr[0] + arr[1], product: arr[0] * arr[1] };
+
+  //! This takes O(nlogn) time. 
+  //! Better loop through the array to find the min and max element - thus taking only O(n)
+  let sortArr = arr.sort((a, b) => a - b);
+  let min = sortArr[0],
+    max = sortArr.at(-1);
+
+  return { sum: min + max, product: min * max };
 }
