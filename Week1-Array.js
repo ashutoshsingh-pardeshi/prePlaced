@@ -130,3 +130,43 @@ function makeZero(arr) {
 
   return Math.max(...arr);
 }
+
+//* Sort an array of 0s, 1s and 2s | Dutch National Flag
+//? Link: problem https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/
+
+let DNF = [0, 1, 2, 2, 1];
+console.log(sortedArray(DNF));
+
+function sortedArray(arr) {
+  //! Native approach is to sort - It requires O(nlogn) time
+
+  // If array is empty
+  if (arr.length === 0) return [];
+
+  // If array contains a single element
+  if (arr.length === 1) return arr;
+
+  let indexOf0 = 0,
+    indexOf2 = arr.length - 1,
+    i = 0;
+  while (i <= indexOf2) {
+    if (arr[i] === 0) {
+      let temp = arr[indexOf0];
+      arr[indexOf0] = arr[i];
+      arr[i] = temp;
+      indexOf0++;
+      i++;
+    }
+    if (arr[i] === 1) {
+      i++;
+    }
+    if (arr[i] === 2) {
+      let temp = arr[indexOf2];
+      arr[indexOf2] = arr[i];
+      arr[i] = temp;
+      indexOf2--
+    }
+  }
+
+  return arr;
+}
