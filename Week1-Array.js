@@ -1,7 +1,7 @@
-// Find a peak element which is not smaller than its neighbors
-// Link: https://www.geeksforgeeks.org/problems/peak-element/1
+//* Find a peak element which is not smaller than its neighbors
+//? Link: https://www.geeksforgeeks.org/problems/peak-element/1
 
-let array1 = [1, 2, 4, 5, 7, 8, 3];
+let array1 = [10, 2, 4, 5, 7, 8, 3];
 // console.log("# Peak exist :", peakElement(array1));
 
 function peakElement(arr) {
@@ -31,11 +31,22 @@ function peakElement(arr) {
   return -1;
 }
 
-// Program to find the minimum (or maximum) element of an array
-// Link: https://www.geeksforgeeks.org/program-find-minimum-maximum-element-array/
+//* Program to find the minimum (or maximum) element of an array
+//? Link: https://www.geeksforgeeks.org/program-find-minimum-maximum-element-array/
 
 console.log("Minimum element = ", findMinMax(array1, 1));
 console.log("Maximum element = ", findMinMax(array1, 0));
+
+//! How .sort() works
+//? return positive - the numbers are swapped
+//? return negative - the order is maintained
+console.log(
+  "Via sort method, minimum = ",
+  array1.sort((a, b) => a - b)[0],
+  " and maximum = ",
+  array1.sort((a, b) => b - a)[0]
+);
+
 function findMinMax(arr, isMin) {
   // isMin undefined or out of boundry
   if (isMin === undefined || ![1, 0].includes(isMin)) return -1;
