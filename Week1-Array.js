@@ -283,14 +283,20 @@ function rotatedArray(arr, isClockwise, steps) {
 //* Count pairs with given sum
 //? Link: https://www.geeksforgeeks.org/count-pairs-with-given-sum/
 
+// console.log(returnPairs([1, 5, 7, -1, 5], 6));
+// console.log(returnPairs([1, 1, 1, 1], 2));
+// console.log(returnPairs([10, 12, 10, 15, -1], 125));
+
 function returnPairs(arr, target) {
   let freq = new Map();
-  for (num of arr) freq.set(num, (freq.get(num) || 0) + 1);
-
   let count = 0;
-  for (num of arr) {
-    count += freq.get(target - num) || 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    let complement = target - arr[i];
+    count += freq.get(complement) || 0;
+
+    freq.set(arr[i], (freq.get(arr[i]) || 0) + 1);
   }
 
-  return count / 2; //! This can give wrong results - need to be updated
+  return count;
 }
