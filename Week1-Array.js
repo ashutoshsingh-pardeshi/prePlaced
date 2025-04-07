@@ -176,11 +176,11 @@ function sortedArray(arr) {
 
 let superSetArray1 = [15, 2, 4, 8, 9, 5, 10, 23];
 let target1 = 12;
-console.log("Subarray positions : ", subArray(superSetArray1, target1));
+// console.log("Subarray positions : ", subArray(superSetArray1, target1));
 
 let superSetArray2 = [1, -2, 3, 4];
 let target2 = 2;
-console.log("Subarray positions : ", subArrayHashmap(superSetArray2, target2));
+// console.log("Subarray positions : ", subArrayHashmap(superSetArray2, target2));
 
 //! This is the sliding window approach
 function subArray(arr, target) {
@@ -211,4 +211,50 @@ function subArray(arr, target) {
 
 function subArrayHashmap(arr, target) {
   return [];
+}
+
+//* Program to cyclically rotate an array by oone (I turned it into k number of steps)
+//? Link: https://www.geeksforgeeks.org/c-program-cyclically-rotate-array-one/
+
+console.log("# Clockwise ", rotatedArray(array1, 1, 2));
+console.log("# Anti-Clockwise ", rotatedArray(array1, -1, 2));
+
+function rotatedArray(arr, isClockwise, steps) {
+  // Invalid input
+  if (![-1, 1].includes(isClockwise) || arr.length === 0) return [-1];
+
+  // Single element
+  if (arr.length === 1) return arr;
+
+  // Steps is 0
+  if (steps <= 0) return arr;
+
+  let rotatedArray = [...arr],
+    length = arr.length;
+
+  // Clockwise -> shift all to right
+  if (isClockwise === 1) {
+    let temp = rotatedArray.slice(-1 * steps);
+    let index = length - 1;
+    while (index - steps >= 0) {
+      rotatedArray[index] = rotatedArray[index - steps];
+      index--;
+    }
+    while (index >= 0) {
+      rotatedArray[index] = temp.pop();
+      index--;
+    }
+    return rotatedArray;
+  }
+
+  // Anti-clockwise -> shift all to left
+  let temp = rotatedArray.slice(0, steps);
+
+  let index = 0;
+  while (steps + index < length) {
+    rotatedArray[index] = rotatedArray[index + steps];
+    index++;
+  }
+  rotatedArray.splice(index, steps, ...temp);
+  return rotatedArray;
 }
