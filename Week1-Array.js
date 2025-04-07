@@ -135,7 +135,7 @@ function makeZero(arr) {
 //? Link: problem https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/
 
 let DNF = [0, 1, 2, 2, 1];
-console.log(sortedArray(DNF));
+// console.log(sortedArray(DNF));
 
 function sortedArray(arr) {
   //! Native approach is to sort - It requires O(nlogn) time
@@ -164,9 +164,51 @@ function sortedArray(arr) {
       let temp = arr[indexOf2];
       arr[indexOf2] = arr[i];
       arr[i] = temp;
-      indexOf2--
+      indexOf2--;
     }
   }
 
   return arr;
+}
+
+//* Find Subarray with given Sum from Array of non-negative Numbers
+//? Link: https://www.geeksforgeeks.org/find-subarray-with-given-sum/
+
+let superSetArray1 = [15, 2, 4, 8, 9, 5, 10, 23];
+let target1 = 12;
+console.log("Subarray positions : ", subArray(superSetArray1, target1));
+
+let superSetArray2 = [1, -2, 3, 4];
+let target2 = 2;
+console.log("Subarray positions : ", subArrayHashmap(superSetArray2, target2));
+
+//! This is the sliding window approach
+function subArray(arr, target) {
+  // Wrong input
+  if (arr.length === 0 || target === undefined) return [-1];
+
+  // Single element
+  if (arr.length === 1 && arr[0] !== target) return [-1];
+
+  // General case
+  let start = 0,
+    sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+    if (sum >= target) {
+      while (sum > target && start < i) {
+        sum -= arr[start];
+        start++;
+      }
+      if (sum == target) {
+        return [start + 1, i + 1];
+      }
+    }
+  }
+
+  return [-1];
+}
+
+function subArrayHashmap(arr, target) {
+  return [];
 }
