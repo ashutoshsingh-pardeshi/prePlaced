@@ -180,7 +180,11 @@ let target1 = 12;
 
 let superSetArray2 = [1, -2, 3, 4];
 let target2 = 2;
-// console.log("Subarray positions : ", subArrayHashmap(superSetArray2, target2));
+// console.log(subArrayHashmap(superSetArray1, target1));
+// console.log(subArrayHashmap(superSetArray2, target2));
+// console.log(subArrayHashmap([1, 2, 3, 4, 5], 9));
+// console.log(subArrayHashmap([10, 2, -2, -20, 10], -10));
+// console.log(subArrayHashmap([2, 12, -2, -20, 10], -10));
 
 //! This is the sliding window approach
 function subArray(arr, target) {
@@ -210,14 +214,31 @@ function subArray(arr, target) {
 }
 
 function subArrayHashmap(arr, target) {
+  let accumulator = new Map();
+  let sum = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+
+    if (sum === target) {
+      return [1, i + 1];
+    }
+
+    let complement = sum - target;
+    if (accumulator.has(complement)) {
+      return [accumulator.get(complement) + 2, i + 1];
+    }
+
+    accumulator.set(sum, i);
+  }
   return [];
 }
 
 //* Program to cyclically rotate an array by oone (I turned it into k number of steps)
 //? Link: https://www.geeksforgeeks.org/c-program-cyclically-rotate-array-one/
 
-console.log("# Clockwise ", rotatedArray(array1, 1, 2));
-console.log("# Anti-Clockwise ", rotatedArray(array1, -1, 2));
+// console.log("# Clockwise ", rotatedArray(array1, 1, 2));
+// console.log("# Anti-Clockwise ", rotatedArray(array1, -1, 2));
 
 function rotatedArray(arr, isClockwise, steps) {
   // Invalid input
@@ -271,5 +292,5 @@ function returnPairs(arr, target) {
     count += freq.get(target - num) || 0;
   }
 
-  return count/2; //! This can give wrong results - need to be updated
+  return count / 2; //! This can give wrong results - need to be updated
 }
