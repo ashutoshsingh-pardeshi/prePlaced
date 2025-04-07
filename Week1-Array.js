@@ -75,7 +75,7 @@ function findMinMax(arr, isMin) {
 //? Link: https://www.geeksforgeeks.org/sum-and-product-of-minimum-and-maximum-element-of-an-array/?ref=ml_lbp
 
 const sum_product = sumAndProduct(array1);
-console.log("# Sum :", sum_product.sum, " and product :", sum_product.product);
+// console.log("# Sum :", sum_product.sum, " and product :", sum_product.product);
 function sumAndProduct(arr) {
   // Corner case
   if ([0, 1].includes(arr.length)) return { sum: -1, product: -1 };
@@ -84,11 +84,39 @@ function sumAndProduct(arr) {
   if (arr.length === 2)
     return { sum: arr[0] + arr[1], product: arr[0] * arr[1] };
 
-  //! This takes O(nlogn) time. 
+  //! This takes O(nlogn) time.
   //! Better loop through the array to find the min and max element - thus taking only O(n)
   let sortArr = arr.sort((a, b) => a - b);
   let min = sortArr[0],
     max = sortArr.at(-1);
 
   return { sum: min + max, product: min * max };
+}
+
+//* Minimum steps to make sum and the product of all elements of array non-zero
+//? Link: https://www.geeksforgeeks.org/minimum-steps-to-make-sum-and-the-product-of-all-elements-of-array-non-zero/?ref=ml_lbp
+
+// console.log(numberOfSteps([0, 1, 2, 3]));
+// console.log(numberOfSteps([-1, -1, 0, 0]));
+// console.log(numberOfSteps([-1, 0, 0]));
+// console.log(numberOfSteps([-1, -2, -3]));
+
+function numberOfSteps(arr) {
+  // If array is empty
+  if (arr.length === 0) return -1;
+
+  // If array contains a single element
+  if (arr.length === 1 && arr[0] === 0) return 1;
+
+  let steps = 0,
+    sum = 0;
+  for (let e of arr) {
+    if (e === 0) {
+      steps += 1;
+      sum += 1;
+    }
+    sum += e;
+  }
+
+  return sum <= 0 ? steps + (1 - sum) : steps;
 }
